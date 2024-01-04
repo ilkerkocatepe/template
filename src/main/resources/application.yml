@@ -1,0 +1,58 @@
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE}
+  application:
+    name: ${SERVICE_NAME}
+  datasource:
+    url: jdbc:mysql://${MYSQL_URL}:${MYSQL_PORT}/${MYSQL_DATABASE}?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Europe/Istanbul
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+  rabbitmq:
+    host: ${RABBITMQ_NODES}
+    port: ${RABBITMQ_PORT}
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+  kafka:
+    bootstrap-servers: ${KAFKA_NODES}
+    consumer:
+      group-id: ${KAFKA_GROUP_ID}
+      enable-auto-commit: true
+  messages:
+    locale: tr
+  jpa:
+    properties:
+      jakarta.persistence.schema-generation.database.action: none
+management:
+  endpoints:
+      web:
+        exposure:
+            include: "*"
+  otlp:
+    metrics:
+      export:
+        url: ${METRICS_HOST}:${METRICS_PORT}${METRICS_PATH}
+        step: 10s
+    tracing:
+      endpoint: ${TRACING_HOST}:${TRACING_PORT}${TRACING_PATH}
+    logging:
+      endpoint: ${LOGGING_HOST}:${LOGGING_PORT}
+  tracing:
+    sampling:
+      probability: 1.0
+  metrics:
+    distribution:
+      percentiles:
+        do.sleep.method.timed: 0.99, 0.95, 0.9, 0.7, 0.5
+        http.server.requests: 0.99, 0.95, 0.9, 0.7, 0.5
+      percentiles-histogram:
+        do.sleep.method.timed: true
+        http.server.requests: true
+      minimum-expected-value:
+        do.sleep.method.timed: 100ms
+        http.server.requests: 100ms
+      maximum-expected-value:
+        do.sleep.method.timed: 10s
+        http.server.requests: 10s
+      slo:
+        do.sleep.method.timed: 300ms,500ms,1s,2s
+        http.server.requests: 300ms,500ms,1s,2s

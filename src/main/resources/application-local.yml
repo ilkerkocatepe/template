@@ -1,0 +1,25 @@
+SPRING_PROFILES_ACTIVE: local
+SERVICE_NAME: template-service
+
+MYSQL_URL: localhost
+MYSQL_USERNAME: root
+MYSQL_PASSWORD: root
+MYSQL_PORT: 3306
+MYSQL_DATABASE: template
+
+METRICS_HOST: http://localhost
+METRICS_PORT: 4318
+METRICS_PATH: /v1/metrics
+TRACING_HOST: http://localhost
+TRACING_PORT: 4318
+TRACING_PATH: /v1/traces
+LOGGING_HOST: http://localhost
+LOGGING_PORT: 4317
+
+RABBITMQ_NODES: localhost
+RABBITMQ_PORT: 5672
+RABBITMQ_USERNAME: guest
+RABBITMQ_PASSWORD: guest
+
+KAFKA_NODES: localhost:9094
+KAFKA_GROUP_ID: template-service
